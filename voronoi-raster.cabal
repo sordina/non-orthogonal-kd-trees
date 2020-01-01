@@ -1,0 +1,35 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 7dc37358edfcfba23e1b542b60c4b2e7ae4a26e5081f7c698822739dbbbd54d6
+
+name:           voronoi-raster
+version:        0.1.0.0
+category:       Web
+homepage:       https://github.com/sordina/voronoi-raster#readme
+author:         Lyndon
+maintainer:     lyndon@sordina.net
+copyright:      Lyndon, 2019
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+executable voronoi-raster
+  main-is: Main.hs
+  other-modules:
+      Paths_voronoi_raster
+  hs-source-dirs:
+      src
+  ghc-options: -threaded -O2 -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , gloss
+    , gloss-raster
+    , linear
+    , random
+  default-language: Haskell2010

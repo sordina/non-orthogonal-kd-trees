@@ -1,0 +1,29 @@
+name:                voronoi-raster
+version:             0.1.0.0
+homepage:            https://github.com/sordina/voronoi-raster#readme
+license:             BSD3
+author:              Lyndon
+maintainer:          lyndon@sordina.net
+copyright:           Lyndon, 2019
+category:            Web
+extra-source-files:
+- README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+  - random
+  - gloss
+  - gloss-raster
+  - linear
+
+executables:
+  voronoi-raster:
+    source-dirs:      src
+    main:             Main.hs
+    ghc-options:
+      - -threaded
+      - -O2
+      - -rtsopts
+      - -with-rtsopts=-N
+
+

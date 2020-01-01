@@ -61,7 +61,10 @@ main = do
   let ps' = zipWith LV2.V2 g h
   let ps  = head ps' :| take 200 (tail ps')
   pp 0 $ index ps
-  animateField FullScreen (1,1) (\t p -> mkColor t (closest (uncurry LV2.V2 p) (index (mvPoints t ps)))) -- Show Nearest Point
+  animateField FullScreen (1,1) (\t p -> mkColor t (closest (uncurry LV2.V2 (rejig t p)) (index (mvPoints t ps)))) -- Show Nearest Point
+
+rejig :: Float -> Point -> Point
+rejig t (x,y) = (sin (t*3+x*2) / 3 + x, sin (t*3+y*4) / 5 + y)
 
 pp :: Show a => Int -> Collection a -> IO ()
 pp n (I p) = putStr (replicate n ' ') >> print p

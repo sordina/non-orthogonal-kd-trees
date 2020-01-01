@@ -61,10 +61,10 @@ main = do
   let ps' = zipWith LV2.V2 g h
   let ps  = head ps' :| take 200 (tail ps')
   pp 0 $ index ps
-  animateField FullScreen (1,1) (\t p -> mkColor t (closest (uncurry LV2.V2 (rejig t p)) (index (mvPoints t ps)))) -- Show Nearest Point
+  animateField FullScreen (1,1) (\t p -> mkColor t (closest (uncurry LV2.V2 (franimate t p)) (index (mvPoints t ps)))) -- Show Nearest Point
 
-rejig :: Float -> Point -> Point
-rejig t (x,y) = (sin (t*3+x*2) / 3 + x, sin (t*3+y*4) / 5 + y)
+franimate :: Float -> Point -> Point
+franimate t (x,y) = (sin (t+x) / 3 + x, sin (t+y) / 5 + y)
 
 pp :: Show a => Int -> Collection a -> IO ()
 pp n (I p) = putStr (replicate n ' ') >> print p
@@ -75,7 +75,7 @@ pp n (T _ a b) = do
   pp (n + 2) b
 
 mvPoints :: (Functor f, Floating a) => a -> f (LV2.V2 a) -> f (LV2.V2 a)
-mvPoints t ps = fmap (\(LV2.V2 x y) -> LV2.V2 ((sin (t + y) / 20) + x) ((sin (2 * t + x) / 20 + y))) ps
+mvPoints t ps = fmap (\(LV2.V2 x y) -> LV2.V2 ((sin (t + y) / 7) + x) ((sin (2 * t + x) / 11 + y))) ps
 
 mkColor :: Float -> LV2.V2 Float -> Color
-mkColor t (LV2.V2 x y) = rgb (foo x) (foo y) (foo (sin t)) where foo i = succ i / 2
+mkColor t (LV2.V2 x y) = rgb' (foo x) (foo y) (foo (sin t)) where foo i = succ i / 2
